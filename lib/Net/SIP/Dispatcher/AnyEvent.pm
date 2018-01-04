@@ -37,7 +37,7 @@ sub addFD {
 
     my $fn = fileno $fh or return;
 
-    $self->{'_fd_watchers'}{$fn} = AE::io $fh, $rw, sub {
+    $self->{'_fd_watchers'}{$fn}[$rw] = AE::io $fh, $rw, sub {
         invoke_callback( $cb_data, $fh );
     }
 }
